@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-
+import React, { useState } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Button,
@@ -24,6 +24,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/actions/auth';
 import RegisterForm from '../RegisterForm';
 import LoginForm from '../LoginForm';
+import { Box } from '@mui/system';
+
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -33,9 +35,9 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
     position: 'fixed',
   },
-  toolbar: {
-    flexWrap: 'wrap'
-  },
+  // toolbar: {
+  //   flexWrap: 'wrap',
+  // },
   toolbarTitle: {
     flexGrow: 1,
     fontWeight: 'bold',
@@ -45,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   toolbarTitleLink: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
     '&:hover': {
       color: '#fff',
     }
@@ -68,6 +74,16 @@ const useStyles = makeStyles((theme) => ({
     },
     '&:focus': {
       outline: 'none'
+    },
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    }
+  },
+  menu: {
+    display: 'inline-block',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
     }
   },
   small: {
@@ -102,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '&:onFocus': {
       border: 'none',
-      outline: 'none'
+      outline: 'none',
     }
   },
   purple: {
@@ -110,60 +126,60 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(3.75),
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
-    fontSize: '17px'
+    fontSize: '17px',
   }
-}))
+}));
 
 // Common navbar for Dashboard, Home, Simulator, Gallery, etc.
 export function Header() {
-  const history = useHistory()
-  const classes = useStyles()
-  const dispatch = useDispatch()
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const auth = useSelector(state => state.auth)
-  const [openLogin, setOpenLogin] = useState(false)
-  const [openSignUp, setOpenSignUp] = useState(false)
+  const history = useHistory();
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const auth = useSelector(state => state.auth);
+  const [openLogin, setOpenLogin] = useState(false);
+  const [openSignUp, setOpenSignUp] = useState(false);
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   const handleOpenLogin = () => {
-    setOpenLogin(true)
-  }
+    setOpenLogin(true);
+  };
   const handleCloseLogin = () => {
-    setOpenLogin(false)
-  }
+    setOpenLogin(false);
+  };
   const handleOpenSignUp = () => {
-    setOpenSignUp(true)
-  }
+    setOpenSignUp(true);
+  };
   const handleCloseSignUp = () => {
-    setOpenSignUp(false)
-  }
+    setOpenSignUp(false);
+  };
   return (
     <>
-      {/* Display logo */}
-      <IconButton edge="start" className={classes.button} color="primary">
-        <Link to="/" component={RouterLink}>
-          <div className={classes.small}></div>
+      {/* Display logo */ }
+      <IconButton edge="start" color="primary">
+        <Link to="/" component={ RouterLink }>
+          <div className={ classes.small }></div>
         </Link>
       </IconButton>
       <Typography
         variant="h6"
         color="inherit"
         noWrap
-        className={classes.toolbarTitle}
+        className={ classes.toolbarTitle }
       >
-        <Link color="inherit" to="/" component={RouterLink} className={classes.toolbarTitleLink}>
+        <Link color="inherit" to="/" component={ RouterLink } className={ classes.toolbarTitleLink }>
           OpenMF
         </Link>
       </Typography>
 
-      {/* Display relative link to other pages */}
+      {/* Display relative link to other pages */ }
       <nav>
         {
           (auth.isAuthenticated
@@ -172,28 +188,28 @@ export function Header() {
                 variant="button"
                 color="textPrimary"
                 to="/"
-                component={RouterLink}
-                className={classes.link}
+                component={ RouterLink }
+                className={ classes.link }
               >
                 Home
               </Link>
 
-              {/* <Link
+              <Link
                 variant="button"
                 color="textPrimary"
                 to="/dashboard/profile"
-                component={RouterLink}
-                className={classes.link}
+                component={ RouterLink }
+                className={ classes.link }
               >
                 Profile
-              </Link> */}
+              </Link>
 
               <Link
                 variant="button"
                 color="textPrimary"
                 to="/list-members"
-                component={RouterLink}
-                className={classes.link}
+                component={ RouterLink }
+                className={ classes.link }
               >
                 Members
               </Link>
@@ -202,8 +218,8 @@ export function Header() {
                 variant="button"
                 color="textPrimary"
                 to="/contact"
-                component={RouterLink}
-                className={classes.link}
+                component={ RouterLink }
+                className={ classes.link }
               >
                 Contact us
               </Link>
@@ -212,8 +228,8 @@ export function Header() {
                 variant="button"
                 color="textPrimary"
                 to="/dashboard"
-                component={RouterLink}
-                className={classes.link}
+                component={ RouterLink }
+                className={ classes.link }
               >
                 Dashboard
               </Link>
@@ -223,9 +239,9 @@ export function Header() {
                 variant="button"
                 color="textPrimary"
                 to="/"
-                component={RouterLink}
-                style={{ marginRight: '20px' }}
-                className={classes.link}
+                component={ RouterLink }
+                style={ { marginRight: '20px' } }
+                className={ classes.link }
               >
                 Home
               </Link>
@@ -234,9 +250,9 @@ export function Header() {
                 variant="button"
                 color="textPrimary"
                 to="/https://github.com/scorelab/OpenMF/"
-                component={RouterLink}
-                style={{ marginRight: '20px' }}
-                className={classes.link}
+                component={ RouterLink }
+                style={ { marginRight: '20px' } }
+                className={ classes.link }
               >
                 Help
               </Link>
@@ -246,29 +262,29 @@ export function Header() {
         }
       </nav>
 
-      {/* Display login option or user menu as per authenticated status */}
+      {/* Display login option or user menu as per authenticated status */ }
       {
         (!auth.isAuthenticated ? (
           <>
             <Button
               variant="outlined"
-              className={classes.button}
-              onClick={handleOpenLogin}
+              className={ classes.button }
+              onClick={ handleOpenLogin }
               disableRipple
               disableTouchRipple
             >
               Login
             </Button>
-            <Dialog open={openLogin} aria-labelledby="login-form" scroll="body">
+            <Dialog open={ openLogin } aria-labelledby="login-form" scroll="body">
               <DialogContent >
-                <LoginForm setOpenLogin={setOpenLogin} />
+                <LoginForm setOpenLogin={ setOpenLogin } />
               </DialogContent>
               <DialogActions>
                 <Button
-                  onClick={() => {
-                    setOpenLogin(false)
-                    setOpenSignUp(true)
-                  }}
+                  onClick={ () => {
+                    setOpenLogin(false);
+                    setOpenSignUp(true);
+                  } }
                   variant="outlined"
                   color="primary"
                   disableRipple
@@ -278,7 +294,7 @@ export function Header() {
                 </Button>
 
                 <Button
-                  onClick={handleCloseLogin}
+                  onClick={ handleCloseLogin }
                   color="primary"
                   disableRipple
                 >
@@ -288,31 +304,31 @@ export function Header() {
             </Dialog>
             <Button
               variant="outlined"
-              className={classes.button}
+              className={ classes.button }
               disableRipple
-              onClick={handleOpenSignUp}
+              onClick={ handleOpenSignUp }
             >
               Register
             </Button>
-            <Dialog open={openSignUp} aria-labelledby="signup-form" scroll="body">
+            <Dialog open={ openSignUp } aria-labelledby="signup-form" scroll="body">
               <DialogContent >
-                <RegisterForm setOpenSignUp={setOpenSignUp} />
+                <RegisterForm setOpenSignUp={ setOpenSignUp } />
               </DialogContent>
               <DialogActions>
                 <Button
-                  onClick={() => {
-                    setOpenSignUp(false)
-                    setOpenLogin(true)
-                  }}
+                  onClick={ () => {
+                    setOpenSignUp(false);
+                    setOpenLogin(true);
+                  } }
                   variant="outlined"
                   color="primary"
                   disableRipple
                 >
                   Login
                 </Button>
-                
+
                 <Button
-                  onClick={handleCloseSignUp}
+                  onClick={ handleCloseSignUp }
                   color="primary"
                   disableRipple
                 >
@@ -325,49 +341,49 @@ export function Header() {
 
             <IconButton
               edge="start"
-              style={{ marginLeft: 'auto' }}
+              style={ { marginLeft: 'auto' } }
               color="primary"
               aria-controls="simple-menu"
               aria-haspopup="true"
-              onClick={handleClick}
+              onClick={ handleClick }
             >
-              <Avatar className={classes.purple}>
-                {(auth && auth.user) ? auth.user.name.charAt(0).toUpperCase() : (<span>wait...</span>)}
+              <Avatar className={ classes.purple }>
+                { (auth && auth.user) ? auth.user.name.charAt(0).toUpperCase() : (<span>wait...</span>) }
               </Avatar>
             </IconButton>
             <Menu
               id="simple-menu"
-              anchorEl={anchorEl}
+              anchorEl={ anchorEl }
               keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-              TransitionComponent={Fade}
-              style={{ marginTop: '25px' }}
+              open={ Boolean(anchorEl) }
+              onClose={ handleClose }
+              TransitionComponent={ Fade }
+              style={ { marginTop: '25px' } }
             >
               <MenuItem
-                component={RouterLink}
+                component={ RouterLink }
                 to="/dashboard"
-                onClick={handleClose}
+                onClick={ handleClose }
               >
-                <ListItemText primary={auth && auth.user && auth.user.email} />
+                <ListItemText primary={ auth && auth.user && auth.user.email } />
               </MenuItem>
-              {/* <MenuItem
-                component={RouterLink}
+              <MenuItem
+                component={ RouterLink }
                 to="/dashboard/profile"
-                onClick={handleClose}
+                onClick={ handleClose }
               >
                 My Profile
-              </MenuItem> */}
+              </MenuItem>
               <MenuItem
-                component={RouterLink}
+                component={ RouterLink }
                 to="/dashboard"
-                onClick={handleClose}
+                onClick={ handleClose }
               >
                 Dashboard
               </MenuItem>
-              <MenuItem onClick={() => {
-                dispatch(logout(history))
-              }}>
+              <MenuItem onClick={ () => {
+                dispatch(logout(history));
+              } }>
                 Logout
               </MenuItem>
             </Menu>
@@ -376,23 +392,56 @@ export function Header() {
         )
       }
     </>
-  )
+  );
 }
 
 export default function Navbar() {
-  const classes = useStyles()
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const classes = useStyles();
+
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar
       position="static"
       color="default"
-      elevation={0}
-      className={classes.appBar}
+      elevation={ 0 }
+      className={ classes.appBar }
     >
-      <Toolbar variant="dense" color="default" className={classes.toolbar}>
-
+      <Toolbar variant="dense" color="default" className={ classes.toolbar }>
         <Header />
+        <Box className={ classes.menu }>
+          <MenuIcon onClick={ handleClick } />
+          <Menu
+            id="demo-positioned-menu"
+            className={ classes.MenuItem }
+            aria-labelledby='demo-positioned-button'
+            anchorEl={ anchorEl }
+            open={ Boolean(anchorEl) }
+            anchorOrigin={ {
+              vertical: "top",
+              horizontal: "right",
+            } }
+            transformOrigin={ {
+              vertical: "top",
+              horizontal: "right",
+            } }
+            onClose={ handleClose }
+          >
+            <MenuItem onClick={ handleClose }>Login</MenuItem>
+            <MenuItem onClick={ handleClose }>Register</MenuItem>
+          </Menu>
+        </Box>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
